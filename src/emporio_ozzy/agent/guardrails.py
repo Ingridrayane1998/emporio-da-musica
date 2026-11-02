@@ -1,12 +1,22 @@
 """Guardrails: deteccao de fora de escopo, insatisfacao e prompt injection."""
 
 import re
+import unicodedata
+
+
+def _normalize_text(text: str) -> str:
+    """Remove acentos e converte para minusculas para correspondencia resiliente."""
+    nfkd = unicodedata.normalize("NFKD", text.lower())
+    return "".join(c for c in nfkd if not unicodedata.combining(c))
+
 
 # ---------------------------------------------------------------------------
 # Palavras-chave de fora do escopo (topicos nao relacionados a loja)
 # ---------------------------------------------------------------------------
 _OUT_OF_SCOPE_PATTERNS = [
     r"\bpolitica\s+(partidaria|eleitoral|governo)\b",
+    r"\beleic(ao|oes)\b",
+    r"\bgoverno\b",
     r"\breceita(s)?\s+(culinaria|de\s+bolo|de\s+cozinha)\b",
     r"\bprogramacao\b",
     r"\bpython\b",
@@ -66,19 +76,19 @@ _INJECTION_PATTERNS = [
 
 def is_out_of_scope(message: str) -> bool:
     """Retorna True se a mensagem claramente sai do escopo da loja."""
-    text = message.lower()
+    text = _normalize_text(message)
     return any(re.search(p, text) for p in _OUT_OF_SCOPE_PATTERNS)
 
 
 def is_dissatisfied(message: str) -> bool:
     """Retorna True se a mensagem indica cliente insatisfeito ou irritado."""
-    text = message.lower()
+    text = _normalize_text(message)
     return any(kw in text for kw in _DISSATISFACTION_KEYWORDS)
 
 
 def is_prompt_injection(message: str) -> bool:
     """Retorna True se a mensagem contem tentativa de prompt injection."""
-    text = message.lower()
+    text = _normalize_text(message)
     return any(re.search(p, text) for p in _INJECTION_PATTERNS)
 
 
@@ -89,4 +99,3 @@ def classify_message(message: str) -> dict:
         "dissatisfied": is_dissatisfied(message),
         "injection": is_prompt_injection(message),
     }
-
