@@ -1,0 +1,11 @@
+promotion_id,product_id,discount_percent,description,is_active
+1,102,10,Black Friday,0
+2,110,15,Liquidação de Inverno,0
+3,122,20,Queima de Estoque,0
+4,95,12,Oferta Especial,0
+5,126,25,Aniversário da Loja,0
+6,93,15,Promoção de Páscoa,0
+7,91,30,Black Friday,0
+8,96,18,Semana do Músico,0
+9,99,8,Promoção de Páscoa,0
+10,116,20,Aniversário da Loja,0

@@ -1,0 +1,11 @@
+customer_id,name,phone,email,city,is_active
+1,Cliente Amostra 1,(11) 98000-1000,cliente.amostra.1@exemplo.com,São Paulo,1
+2,Cliente Amostra 2,(11) 98000-1001,cliente.amostra.2@exemplo.com,São Paulo,1
+3,Cliente Amostra 3,(11) 98000-1002,cliente.amostra.3@exemplo.com,São Paulo,1
+4,Cliente Amostra 4,(11) 98000-1003,cliente.amostra.4@exemplo.com,São Paulo,1
+5,Cliente Amostra 5,(11) 98000-1004,cliente.amostra.5@exemplo.com,São Paulo,1
+6,Cliente Amostra 6,(11) 98000-1005,cliente.amostra.6@exemplo.com,São Paulo,1
+7,Cliente Amostra 7,(11) 98000-1006,cliente.amostra.7@exemplo.com,São Paulo,1
+8,Cliente Amostra 8,(11) 98000-1007,cliente.amostra.8@exemplo.com,São Paulo,1
+9,Cliente Amostra 9,(11) 98000-1008,cliente.amostra.9@exemplo.com,São Paulo,1
+10,Cliente Amostra 10,(11) 98000-1009,cliente.amostra.10@exemplo.com,São Paulo,1
