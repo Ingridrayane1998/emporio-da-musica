@@ -29,3 +29,76 @@ Usuário ► UI (Chat Front-end)
 4. **Base Relacional:** SQLite local para dados estruturados de clientes, pedidos, itens, produtos e promoções.
 5. **Base Vetorial:** ChromaDB em disco para busca semântica em políticas e regulamentos da loja.
 
+---
+
+## Modelo de Dados Relacional (SQLite)
+
+Diagrama de Entidade-Relacionamento (ER) implementado via SQLAlchemy em `src/emporio_ozzy/db/models.py`:
+
+```mermaid
+erDiagram
+    CATEGORIES ||--o{ PRODUCTS : categorizes
+    CUSTOMERS ||--o{ ORDERS : places
+    CUSTOMERS ||--o{ TICKETS : opens
+    ORDERS ||--|{ ORDER_ITEMS : contains
+    PRODUCTS ||--o{ ORDER_ITEMS : included_in
+    PRODUCTS ||--o{ PROMOTIONS : has
+
+    CATEGORIES {
+        int category_id PK
+        string name
+        string description
+    }
+    CUSTOMERS {
+        int customer_id PK
+        string name
+        string phone
+        string email UK
+        string city
+        int is_active
+    }
+    PRODUCTS {
+        int product_id PK
+        string name
+        int category_id FK
+        float price_brl
+        int stock_quantity
+        string status
+        string specs
+        string description
+        string created_at
+    }
+    ORDERS {
+        int order_id PK
+        int customer_id FK
+        string order_date
+        string status
+        float total_brl
+        string payment_method
+        string tracking_code
+        string estimated_delivery
+        string notes
+    }
+    ORDER_ITEMS {
+        int order_item_id PK
+        int order_id FK
+        int product_id FK
+        int quantity
+    }
+    PROMOTIONS {
+        int promotion_id PK
+        int product_id FK
+        int discount_percent
+        string description
+        int is_active
+    }
+    TICKETS {
+        string ticket_id PK
+        int customer_id FK
+        string reason
+        string priority
+        string status
+        string conversation_summary
+        string created_at
+    }
+```
