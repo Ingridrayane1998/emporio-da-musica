@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    """Configurações da aplicação Ozzy carregadas de variáveis de ambiente ou .env."""
+    """ConfiguraÃ§Ãµes da aplicaÃ§Ã£o Ozzy carregadas de variÃ¡veis de ambiente ou .env."""
 
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -15,7 +15,7 @@ class Settings(BaseSettings):
 
     # Groq API
     groq_api_key: str = ""
-    groq_model: str = "llama-3.3-70b-versatile"
+    groq_model: str = "openai/gpt-oss-120b"
 
     # Caminhos de dados
     db_path: Path = Path("data/emporio.db")
@@ -30,6 +30,6 @@ class Settings(BaseSettings):
 
 @lru_cache
 def get_settings() -> Settings:
-    """Retorna instância única (em cache) das configurações."""
+    """Retorna instÃ¢ncia Ãºnica (em cache) das configuraÃ§Ãµes."""
     return Settings()
 
