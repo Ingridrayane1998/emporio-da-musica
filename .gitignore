@@ -1,8 +1,41 @@
+# Ambientes virtuais
+venv/
+.venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Dados reais (LGPD) e bancos locais gerados
+data/raw/
+data/processed/
+data/chroma/
+*.db
+*.sqlite
+*.sqlite3
+
+# Segredos e variáveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Node / Frontend build
 node_modules/
 build/
 dist/
 coverage/
-.DS_Store
 *.log
-.env*
-!.env.example
+.DS_Store
+
+# IDE / Editor
+.vscode/
+.idea/
