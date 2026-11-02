@@ -8,6 +8,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestionChips = document.querySelectorAll('.suggestion-chip');
 
   let isTyping = false;
+  // Gerenciamento de sessao: ID unico por aba/sessao de navegador
+  let sessionId = sessionStorage.getItem('ozzy_session_id') || null;
+
+  // Inicia sessao ao carregar a pagina
+  async function initSession() {
+    if (!sessionId) {
+      try {
+        const res = await fetch('/api/session', { method: 'POST' });
+        const data = await res.json();
+        sessionId = data.session_id;
+        sessionStorage.setItem('ozzy_session_id', sessionId);
+      } catch (e) {
+        sessionId = 'local-' + Math.random().toString(36).slice(2);
+      }
+    }
+  }
+  initSession();
 
   // Format currency
   function formatBRL(val) {
@@ -129,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="handoff-ticket">${ticketId}</span>
         </div>
         <div class="handoff-title">Especialista Notificado</div>
-        <div class="handoff-desc">${escapeHtml(reason)}. Nosso luthier/atendente foi acionado e entrará em contato em instantes!</div>
+        <div class="handoff-desc">${escapeHtml(reason)}. Nosso luthier/atendente foi acionado e entrarÃ¡ em contato em instantes!</div>
       </div>
     `;
   }
@@ -157,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: msg })
+        body: JSON.stringify({ message: msg, session_id: sessionId })
       });
 
       if (!response.ok) {
@@ -171,10 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 400);
 
     } catch (err) {
-      console.error("Erro na comunicação com a API:", err);
+      console.error("Erro na comunicaÃ§Ã£o com a API:", err);
       setTimeout(() => {
         appendOzzyMessage({
-          reply: "Opa, tive uma pequena oscilação na conexão com o palco! Mas já estou afinando tudo aqui de novo. Pode repetir sua pergunta?"
+          reply: "Opa, tive uma pequena oscilaÃ§Ã£o na conexÃ£o com o palco! Mas jÃ¡ estou afinando tudo aqui de novo. Pode repetir sua pergunta?"
         });
         setTyping(false);
       }, 500);
@@ -203,14 +220,14 @@ document.addEventListener('DOMContentLoaded', () => {
   muteBtn.addEventListener('click', () => {
     const isMuted = window.soundSynth.toggleMute();
     muteBtn.innerHTML = isMuted ? '&#128263;' : '&#128266;';
-    muteBtn.title = isMuted ? 'Desmutar áudio' : 'Mutar áudio';
+    muteBtn.title = isMuted ? 'Desmutar Ã¡udio' : 'Mutar Ã¡udio';
   });
 
   clearBtn.addEventListener('click', () => {
     if (confirm("Deseja limpar as mensagens do chat?")) {
       messagesContainer.innerHTML = '';
       appendOzzyMessage({
-        reply: "Palco zerado! Como posso te ajudar agora? Quer encontrar um instrumento, checar um pedido ou saber nossas políticas?"
+        reply: "Palco zerado! Como posso te ajudar agora? Quer encontrar um instrumento, checar um pedido ou saber nossas polÃ­ticas?"
       });
     }
   });

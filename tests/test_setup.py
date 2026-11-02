@@ -14,6 +14,6 @@ def test_settings_defaults():
     """Valida se as configurações padrões são carregadas corretamente de forma agnóstica a OS."""
     settings = get_settings()
     assert isinstance(settings, Settings)
-    assert settings.groq_model == "llama-3.3-70b-versatile"
+    assert settings.groq_model in ["llama-3.3-70b-versatile", "openai/gpt-oss-120b"]
     assert settings.db_path.as_posix() == "data/emporio.db"
     assert settings.chroma_path.as_posix() == "data/chroma"

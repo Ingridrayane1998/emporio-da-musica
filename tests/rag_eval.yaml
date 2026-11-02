@@ -1,0 +1,81 @@
+# Conjunto de avaliação de recuperação semântica (RAG) - Empório da Música
+- id: q01
+  query: "Qual o desconto para pagamento à vista no PIX?"
+  expected_pages: [3]
+  topic: "Formas de Pagamento"
+
+- id: q02
+  query: "Quantas vezes posso parcelar no cartão de crédito sem juros?"
+  expected_pages: [3]
+  topic: "Formas de Pagamento"
+
+- id: q03
+  query: "Qual é o valor da parcela mínima no cartão de crédito?"
+  expected_pages: [3]
+  topic: "Formas de Pagamento"
+
+- id: q04
+  query: "Qual o prazo para devolver um produto por direito de arrependimento?"
+  expected_pages: [4]
+  topic: "Trocas e Devoluções"
+
+- id: q05
+  query: "Quantos dias tenho de garantia para instrumentos com defeito de fabricação?"
+  expected_pages: [4]
+  topic: "Trocas e Devoluções"
+
+- id: q06
+  query: "Quem arca com o frete da devolução por arrependimento?"
+  expected_pages: [4]
+  topic: "Trocas e Devoluções"
+
+- id: q07
+  query: "Qual é o prazo estimado de entrega dos Correios via SEDEX e PAC?"
+  expected_pages: [5]
+  topic: "Frete e Prazos"
+
+- id: q08
+  query: "A partir de qual valor o frete é grátis para Mato Grosso do Sul?"
+  expected_pages: [5]
+  topic: "Frete Grátis"
+
+- id: q09
+  query: "Qual o valor do pedido para ter frete grátis em outros estados fora do MS?"
+  expected_pages: [5]
+  topic: "Frete Grátis"
+
+- id: q10
+  query: "Existe entrega expressa no mesmo dia para Campo Grande?"
+  expected_pages: [5]
+  topic: "Frete e Prazos"
+
+- id: q11
+  query: "Qual é o cupom de desconto para a primeira compra no site?"
+  expected_pages: [6]
+  topic: "Promoções e Cupons"
+
+- id: q12
+  query: "Em que mês acontece a promoção de aniversário da loja?"
+  expected_pages: [6]
+  topic: "Promoções"
+
+- id: q13
+  query: "Onde fica localizada a loja física da Empório da Música?"
+  expected_pages: [1, 2]
+  topic: "Sobre a Loja e Endereço"
+
+- id: q14
+  query: "Qual é o horário de atendimento da loja durante a semana e aos sábados?"
+  expected_pages: [2]
+  topic: "Horário de Funcionamento"
+
+- id: q15
+  query: "Qual o telefone de contato e e-mail da loja para falar com o suporte?"
+  expected_pages: [1, 2]
+  topic: "Canais de Atendimento"
+
+- id: q16
+  query: "Como a loja protege meus dados pessoais conforme a LGPD?"
+  expected_pages: [8]
+  topic: "Privacidade e LGPD"
+

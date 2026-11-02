@@ -1,5 +1,6 @@
-"""Gerenciamento de conexão e sessão do banco de dados SQLite."""
+"""Gerenciamento de conexao e sessao do banco de dados SQLite."""
 
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Generator
 
@@ -28,14 +29,25 @@ def get_engine(db_path: Path | str | None = None) -> Engine:
 
 
 def get_session_factory(engine: Engine | None = None) -> sessionmaker[Session]:
-    """Retorna uma fábrica de sessões configurada para a engine."""
+    """Retorna uma fabrica de sessoes configurada para a engine."""
     if engine is None:
         engine = get_engine()
     return sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 def get_db() -> Generator[Session, None, None]:
-    """Gerador de sessão para injeção de dependência no FastAPI e context manager."""
+    """Gerador de sessao para injecao de dependencia no FastAPI."""
+    session_factory = get_session_factory()
+    db = session_factory()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+@contextmanager
+def get_session() -> Generator[Session, None, None]:
+    """Context manager de sessao para uso direto nas ferramentas do Ozzy."""
     session_factory = get_session_factory()
     db = session_factory()
     try:
