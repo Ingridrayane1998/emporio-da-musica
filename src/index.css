@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #0F0B1A;
+    --surface: #1A1330;
+    --surface-2: #251B45;
+    --primary: #FF6B35;
+    --secondary: #7C5CFF;
+    --accent: #F7C948;
+    --text: #F5F1FF;
+    --text-muted: #A79FC4;
+    --success: #3DDC97;
+    --danger: #FF4D6D;
+  }
+
+  body {
+    background-color: #0F0B1A;
+    color: #F5F1FF;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0F0B1A;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #251B45;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #7C5CFF;
+  }
+}
+
+/* Equalizer keyframes for Ozzy's typing indicator */
+@keyframes eqBar1 {
+  0%, 100% { height: 4px; }
+  50% { height: 18px; }
+}
+
+@keyframes eqBar2 {
+  0%, 100% { height: 16px; }
+  50% { height: 6px; }
+}
+
+@keyframes eqBar3 {
+  0%, 100% { height: 8px; }
+  50% { height: 22px; }
+}
+
+@keyframes eqBar4 {
+  0%, 100% { height: 20px; }
+  50% { height: 8px; }
+}
+
+.animate-eq-1 {
+  animation: eqBar1 0.8s ease-in-out infinite;
+}
+
+.animate-eq-2 {
+  animation: eqBar2 0.7s ease-in-out infinite 0.15s;
+}
+
+.animate-eq-3 {
+  animation: eqBar3 0.85s ease-in-out infinite 0.3s;
+}
+
+.animate-eq-4 {
+  animation: eqBar4 0.75s ease-in-out infinite 0.45s;
+}
+
+/* Ambient tube-amp glow */
+.glow-primary {
+  box-shadow: 0 0 25px -4px rgba(255, 107, 53, 0.35);
+}
+
+.glow-secondary {
+  box-shadow: 0 0 25px -4px rgba(124, 92, 255, 0.35);
+}
+
+.glow-accent {
+  box-shadow: 0 0 20px -3px rgba(247, 201, 72, 0.3);
+}
+
+.glass-panel {
+  background: rgba(26, 19, 48, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(124, 92, 255, 0.16);
+}
+
+.glass-card {
+  background: rgba(37, 27, 69, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Empório da Música & Ozzy",
+  "description": "Boutique de instrumentos musicais com assistente inteligente Ozzy, glassmorphism dark UI e laboratório de timbres.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
