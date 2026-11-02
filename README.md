@@ -1,6 +1,77 @@
-# Empório da Música & Ozzy
+# Empório da Música - Ozzy, o agente de atendimento
 
-Instruções para configuração, preparação dos dados e execução local da aplicação.
+### Justificativa e escolhas durante o desenvolvimento do agente:
+O projeto foi desenvolvido utilizando o Google Antigravity como ferramenta principal para o desenvolvimento do código.
+
+Meu workflow de desenvolvimento consiste nos seguintes passos:
+
+1- Criar um plano de desenvolvimento passo a passo no Claude para utilizar no assistente de código;
+
+2- Desenvolver o prototipo da identidade visual no Google Stich;
+
+3- Subir os prototipos visuais no Google AI Studio e levar para o Github (Frontend)
+
+4- Se necessário refinar ou alterar o plano de desenvolvimento no Gemini;
+
+5- Conectar o repositorio do Github no Google Antigravity, anexar o plano de desenvolvimento gerado no Claude e iniciar o desenvolvimento passo a passo do backend, e após a conexão com o frontend gerado. 
+
+6 - Modelagem e padronização dos dados - No CSV de clientes percebi uma duplicidade de e-mails em dois clientes, então priorizei o cliente que havia criado o cadastro primeiro e desativei o segundo, pois o mesmo não tinha nenhum pedido.
+
+---
+
+• Abordagem Escolhida — Arquitetura Híbrida com Function Calling
+Para que o agente consiguisse transitar de forma precisa por diferentes fontes de informação, textos não estruturados e tabelas relacionais, estruturei uma arquitetura híbrida.
+
+Modelei um banco de dados relacional (SQLite) a partir das planilhas em CSV e um banco vetorial (ChromaDB) com os dados extraídos do PDF. Essa escolha foi motivada por uma experiência anterior no desenvolvimento de agentes, na qual o principal gargalo foi a ausência de busca semântica, pois o modelo frequentemente dizia ter encontrado a resposta apenas por haver palavras coincidentes entre a pergunta e o texto, gerando alucinações.
+
+Por isso, adotei o Function Calling como mecanismo orquestrador central para acionar o RAG e o SQL:
+
+RAG: O PDF de políticas foi segmentado em chunks semânticos com sobreposição e indexado no banco vetorial, sendo consultado via ferramenta buscar_politicas.
+
+SQL: Consultas estruturadas de produtos, estoque e pedidos foram transformados em funções (buscar_produtos, consultar_pedido, etc), eliminando riscos de injeção ou alucinação.
+
+Implementei uma camada de Guardrails pré-LLM para avaliação de sentimento/insatisfação e interceptação imediata de assuntos fora de contexto, enquanto o padrão ReAct rege o loop de decisão e resposta final do agente.
+
+Provedor LLM: Groq openai (gpt-oss-120b)
+
+* Limitações:
+Para os próximos eu pensaria em melhorar a interface do Chat e experiencia do usuário final (UX), como por exemplo: Implementar o circulo verde, como se o agente estivesse online, melhorar a disposição do chat no navegador e desenvolver uma interface mobile também.
+
+---
+
+
+## Exemplos de interações com o agente:
+
+* Consulta de status do pedido:
+<img width="1365" height="767" alt="teste1_consulta_de_pedido" src="https://github.com/user-attachments/assets/676e2343-7a1f-44a0-8d06-226510394b09" />
+
+
+
+* Perguntando ao agente se posso consultar o pedido de outra pessoa:
+<img width="1364" height="767" alt="teste2_tentando_consultar_pedido_de_outra_pessoa" src="https://github.com/user-attachments/assets/1a3cd2ea-0b50-4cc2-9dfd-bebbe41cd677" />
+
+
+
+* Consulta de status do pedido com dados incorretos:
+<img width="1365" height="767" alt="teste3_informando_pedido_incorreto" src="https://github.com/user-attachments/assets/1b7f6182-633d-4dfa-b2e2-10c4c6d1831a" />
+
+
+
+* Desvio de assunto:
+<img width="1365" height="766" alt="teste4_desvio_de_assunto" src="https://github.com/user-attachments/assets/c97c6798-54b7-4dc5-b87b-15ffae7f9bbb" />
+
+
+
+* Consulta de política de devolução:
+<img width="1363" height="767" alt="teste5_consulta_politica_de_devolucao" src="https://github.com/user-attachments/assets/2b875aba-4038-460a-9b3e-7ac5017c552c" />
+
+
+
+
+
+---
+
+# Instruções para configuração, preparação dos dados e execução local da aplicação.
 
 ---
 
